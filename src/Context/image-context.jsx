@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 
 const ImageContext = React.createContext({
+	theme: "light",
+	setTheme: () => {},
 	query: "",
 	setQuery: (query) => {},
 	images: [],
@@ -21,6 +23,29 @@ export const ImageProvider = ({ children }) => {
 	const [images, setImages] = useState([]);
 	const [page, setPageNumber] = useState(1);
 	const [hasMore, setHasMoreImages] = useState(true);
+	const [theme, setApplicationTheme] = useState("");
+
+	useLayoutEffect(() => {
+		console.log("useLayoutEffect");
+		if (
+			localStorage.theme === "dark" ||
+			(!("theme" in localStorage) &&
+				window.matchMedia("(prefers-color-scheme: dark)").matches)
+		) {
+			localStorage.setItem("theme", "dark");
+			document.documentElement.classList.add("dark");
+			setApplicationTheme("dark");
+		} else {
+			localStorage.setItem("theme", "light");
+			document.documentElement.classList.remove("dark");
+			setApplicationTheme("light");
+		}
+	}, [theme]);
+
+	const setTheme = (theme) => {
+		setApplicationTheme(theme);
+		localStorage.setItem("theme", theme);
+	};
 
 	const searchResults = (images) => {
 		setImages(images);
@@ -42,6 +67,8 @@ export const ImageProvider = ({ children }) => {
 	return (
 		<ImageContext.Provider
 			value={{
+				theme,
+				setTheme,
 				query,
 				setQuery,
 				images,

@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import ImageContext from "../Context/image-context";
 
 const NavBar = () => {
+	const context = useContext(ImageContext);
+
+	const setThemeHandler = () => {
+		context.setTheme(context.theme === "light" ? "dark" : "light");
+	};
+
 	return (
-		<div className="flex items-center p-5 mb-10 shadow-xl shadow-neutral-100 text-neutral-700">
+		<div className="flex sticky top-0 z-50 dark:bg-blue-900 bg-white w-full items-center p-2 md:mb-10 shadow shadow-neutral-100 text-neutral-700">
 			<div className="flex items-center flex-grow">
 				<Link
 					to="/"
-					className="flex text-neutral-900 font-bold text-2xl md:text-4xl lg:text-6xl"
+					className="flex text-neutral-900 font-bold text-2xl md:text-4xl"
 				>
 					React Gallery
 				</Link>
@@ -36,10 +43,10 @@ const NavBar = () => {
 						/>
 					</svg>
 				</NavLink>
-				<div className="flex text-neutral-300 bg-neutral-100 p-3 rounded-xl">
+				<div className="flex items-center text-neutral-300 bg-neutral-100 p-3 rounded-xl">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="md:h-7 h-5"
+						className="md:h-7 h-5 mx-2"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -51,9 +58,19 @@ const NavBar = () => {
 							d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
 						/>
 					</svg>
+					<div
+						className="bg-neutral-200 shadow-inner relative p-3 px-8 rounded-full cursor-pointer"
+						onClick={setThemeHandler}
+					>
+						<span
+							className={`bg-neutral-50 absolute left-0 top-0 ${
+								context.theme === "dark" ? "translate-x-10" : ""
+							} p-3 rounded-full drop-shadow-md duration-300`}
+						></span>
+					</div>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="md:h-7 h-5"
+						className="md:h-7 h-5 mx-2"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"

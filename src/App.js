@@ -11,7 +11,6 @@ function App() {
 		<>
 			<NavBar />
 			<div className="flex flex-col items-center w-full">
-				<SearchBar />
 				<Outlet />
 			</div>
 		</>

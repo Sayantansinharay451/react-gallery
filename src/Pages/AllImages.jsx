@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Container from "../Components/Container";
 import Message from "../Components/Message";
+import SearchBar from "../Components/SearchBar";
 import ImageContext from "../Context/image-context";
 import { useImageSearch } from "../Hooks/useImageSearch";
 
@@ -16,7 +17,8 @@ const AllImages = () => {
 
 	return (
 		<>
-			<div className="w-full">
+			<div className="w-full flex flex-col">
+				<SearchBar />
 				<Container images={context.images} />
 			</div>
 			<Message error={error} loading={loading} />

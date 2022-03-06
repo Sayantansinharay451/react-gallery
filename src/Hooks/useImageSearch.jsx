@@ -52,10 +52,10 @@ export const useImageSearch = (query) => {
 				);
 				setLoading(false);
 			} catch (error) {
-				if (error.name === "AbortError") {
+				if (error.message === "canceled") {
 					return;
 				}
-				setError(true);
+				setError(error);
 				setLoading(false);
 			}
 		};

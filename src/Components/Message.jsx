@@ -3,7 +3,7 @@ import ImageContext from "../Context/image-context";
 
 const Message = ({ loading, error }) => {
 	const context = useContext(ImageContext);
-
+	console.log(error);
 	return (
 		<div className="m-52">
 			{loading ? (
