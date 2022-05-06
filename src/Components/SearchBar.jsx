@@ -9,13 +9,15 @@ const SearchBar = () => {
     <div className="flex w-full justify-center md:my-5">
       <div
         className={`relative border-b-4 ${
-          isFocus ? "md:w-3/5 pr-10 border-neutral-900" : "md:w-3/5"
+          isFocus
+            ? "md:w-3/5 pr-10 dark:border-neutral-100 border-neutral-900"
+            : "md:w-3/5 dark:border-neutral-700"
         } w-4/5 pl-3 duration-300`}
       >
         <input
           type="text"
           value={context.query}
-          className="w-full placeholder-neutral-300 outline-none text-2xl font-medium"
+          className="w-full dark:bg-neutral-900 dark:text-white dark:placeholder-neutral-600 placeholder-neutral-300 outline-none text-2xl font-medium"
           placeholder="Search..."
           onChange={(e) => context.setQuery(e.target.value)}
           onFocus={() => setIsFocus(true)}
@@ -24,18 +26,14 @@ const SearchBar = () => {
         {context.query.length > 0 && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`md:h-8 p-1 mr-3 h-5 absolute top-0 right-0 rounded-full ${
-              !isFocus
-                ? "opacity-0 invisible -z-0"
-                : "opacity-100 visible cursor-pointer"
-            } duration-300`}
+            className={`md:h-8 p-1 mr-3 h-8 absolute top-0 right-0 rounded-full dark:text-white z-10 cursor-pointer`}
             viewBox="0 0 20 20"
             fill="currentColor"
             onClick={() => {
-              if (isFocus) {
-                console.log("clear");
-                context.setQuery("");
-              }
+              //   if (isFocus) {
+              console.log("clear");
+              context.setQuery("");
+              //   }
             }}
           >
             <path
